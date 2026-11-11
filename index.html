@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Login • Instagram</title>
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/tejazmali/instagram-login-clone/refs/heads/main/img/Instagram-Icon.png">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/tejazmali/instagram-login-clone/refs/heads/main/img/Instagram_logo_2016.svg.webp">
     
     <style>
         body {
@@ -75,14 +75,13 @@
         }
 
         .heading {
-            margin: 36px auto 12px;
-            height: 51px;
-            width: 175px;
-            /* Using the raw Instagram Icon you linked */
-            background-image: url("https://raw.githubusercontent.com/tejazmali/instagram-login-clone/refs/heads/main/img/Instagram-Icon.png");
+            margin: 22px auto 12px;
+            background-image: url("https://raw.githubusercontent.com/tejazmali/instagram-login-clone/refs/heads/main/img/Instagram_logo_2016.svg.webp");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            height: 51px;
+            width: 175px;
         }
 
         .login-form {
@@ -203,8 +202,10 @@
             justify-content: center;
         }
 
-        .fb-login-btn svg {
+        .fb-login-btn img {
             margin-right: 8px;
+            width: 16px;
+            height: 16px;
         }
 
         .fb-login-btn a {
@@ -310,7 +311,6 @@
 
     <div class="container">
         <div class="box">
-            <!-- Using your exact raw Instagram icon link -->
             <div class="heading"></div>
             
             <form class="login-form" action="" method="post" onsubmit="redirectToInstagram(event)">
@@ -333,10 +333,8 @@
                 
                 <div class="other">
                     <button class="fb-login-btn" type="button" onclick="window.location.href='https://www.facebook.com/login.php/'">
-                        <!-- Crisp inline SVG for the Facebook logo -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#385185">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
+                        <!-- Using your exact Facebook logo link -->
+                        <img src="https://raw.githubusercontent.com/tejazmali/instagram-login-clone/refs/heads/main/img/Facebook-logo.png" alt="FB" />
                         <span>Log in with Facebook</span>
                     </button>
                     <a class="forgot-password" href="https://www.instagram.com/accounts/password/reset/?__pwa=1">Forgot password?</a>
